@@ -1,41 +1,75 @@
 package com.concatel.exam2.controllers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Map;
+
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
+import com.concatel.exam2.services.IDispositivoService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 class DispositivoControllerTest {
 
+//	@Rule
+  //  public MockitoRule rule = MockitoJUnit.rule();
 	
-	private MockMvc mockMvc;
+	@Mock 
+	IDispositivoService iDispositivoService;
 	
 	@InjectMocks
-	private DispositivoController dispositivoController;
+	DispositivoController dispositivoController;
+	
 	
 	@Before
-	void setUp() throws Exception {
+	public void init() throws Exception {
 		
-		mockMvc = MockMvcBuilders.standaloneSetup(dispositivoController).build();
+		MockitoAnnotations.initMocks(this);
 		
 	}
 	
 	@Test
-	void test() throws Exception {
+	public void startTest() 
+	
+	{
 		
-		mockMvc.perform(get("/api/actual"))
+		final ResponseEntity<Map<String,Object>> response = dispositivoController.start();
 		
-				.andExpect(status().isOk());
-			
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
 		
 	}
+	
+	
+	@Test
+	public void valorInicial() 
+	
+	{
+		
+		final ResponseEntity<Map<String,Object>> response = dispositivoController.valorInicial(4);
+		
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+		
+	}
+	
+	
+	@Test
+	public void valorActual() 
+	
+	{
+		
+		final ResponseEntity<Map<String,Object>> response = dispositivoController.valorActual();
+		
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+		
+	}
+	
+	
 
 }

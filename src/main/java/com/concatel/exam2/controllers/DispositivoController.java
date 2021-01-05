@@ -34,7 +34,7 @@ public class DispositivoController {
 	
 	@PostMapping("/start")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<?> start()
+	public ResponseEntity<Map<String,Object>> start()
 	{
 		
 		logger.info("inicio metodo start ");
@@ -55,7 +55,7 @@ public class DispositivoController {
 	
 	
 	@GetMapping("/actual")
-	public  ResponseEntity<?> valorActual()  
+	public  ResponseEntity<Map<String,Object>> valorActual()  
 		
 	{
 		logger.info("inicio metodo valorActual ");
@@ -72,7 +72,7 @@ public class DispositivoController {
 	
 		
 	@PostMapping("/inicial")
-	public ResponseEntity<?> valorInicial(@FormParam("valor") Integer valor)
+	public ResponseEntity<Map<String,Object>> valorInicial(@FormParam("valor") Integer valor)
 	{
 		logger.info("inicio metodo update ");
 		

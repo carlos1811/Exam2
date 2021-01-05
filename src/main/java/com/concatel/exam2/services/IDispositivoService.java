@@ -8,7 +8,6 @@ public interface IDispositivoService {
 	public Integer valorActual();
 
 	public void valorInicial(Integer valorInicial);
-	
-	
+		
 
 }
