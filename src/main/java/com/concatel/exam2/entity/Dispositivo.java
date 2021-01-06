@@ -26,7 +26,7 @@ public class Dispositivo implements Serializable {
     @Column(name = "id_dispositivo")
 	private Long idDispositivo;
 	
-	private Integer valorInicial = 0  ;
+	private Integer valorInicial = 10 ;
 	
 	private Integer valorActual = 0 ;
 	

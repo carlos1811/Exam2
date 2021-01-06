@@ -71,9 +71,9 @@ public class DispositivoController {
 	
 		
 	@PostMapping("/inicial")
-	public ResponseEntity<Map<String,Object>> valorInicial(@FormParam("valor") Integer valor)
+	public ResponseEntity<Map<String,Object>> valorInicial(@FormParam("valor") int valor)
 	{
-		logger.info("inicio metodo update ");
+		logger.info("inicio metodo valorInicial ");
 		
 		Map<String,Object> response = new HashMap<>();
 		
@@ -85,6 +85,9 @@ public class DispositivoController {
 			response.put("errors",e.getMessage());
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
 		}
+		
+		response.put("mensaje","Cuenta atras iniciada al tiempo: " + valor);
+		
 		
 		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}	
