@@ -30,7 +30,6 @@ public class Dispositivo implements Serializable {
 	
 	private Integer valorActual = 0 ;
 	
-	
 	public Dispositivo(Long idDispositivo, Integer valorInicial, Integer valorActual) {
 		super();
 		this.idDispositivo = idDispositivo;

@@ -27,81 +27,72 @@ import javassist.bytecode.stackmap.TypeData.ClassName;
 public class DispositivoController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
-	
+
 	@Autowired
 	private IDispositivoService dispositivoService;
-	
-	
+
 	@PostMapping("/start")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Map<String,Object>> start()
-	{
-		
+	public ResponseEntity<Map<String, Object>> start() {
+
 		logger.info("inicio metodo start ");
-		
-		Map<String,Object> response = new HashMap<>();
-					
+
+		Map<String, Object> response = new HashMap<>();
+
 		try {
-		dispositivoService.start();
+			dispositivoService.start();
 		} catch (RuntimeException e) {
-			response.put("errors",e.getMessage());
-				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
+			response.put("errors", e.getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		} catch (DispositivoException e) {
-			
+
 			response.put("mensaje", e.getMessage());
 			response.put("mensaje", e.getCode());
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
-		
-		
+
 		response.put("mensaje", "Cuenta atras finalizada");
-		
-		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
-	
-	
+
 	@GetMapping("/actual")
-	public  ResponseEntity<Map<String,Object>> valorActual()  
-		
+	public ResponseEntity<Map<String, Object>> valorActual()
+
 	{
 		logger.info("inicio metodo valorActual ");
-		
-		Map<String,Object> response = new HashMap<>();
-		
-		
+
+		Map<String, Object> response = new HashMap<>();
+
 		Integer tiempoRestante = dispositivoService.valorActual();
-		
-		response.put("tiempo",tiempoRestante);
-		
-		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+
+		response.put("tiempo", tiempoRestante);
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
-	
-		
+
 	@PostMapping("/inicial")
-	public ResponseEntity<Map<String,Object>> valorInicial(@FormParam("valor") int valor)
-	{
+	public ResponseEntity<Map<String, Object>> valorInicial(@FormParam("valor") int valor) {
 		logger.info("inicio metodo valorInicial ");
-		
-		Map<String,Object> response = new HashMap<>();
-		
+
+		Map<String, Object> response = new HashMap<>();
+
 		try {
-		
+
 			dispositivoService.valorInicial(valor);
-				
+
 		} catch (RuntimeException e) {
-			response.put("errors",e.getMessage());
-				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
+			response.put("errors", e.getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		} catch (DispositivoException e) {
 			response.put("mensaje", e.getMessage());
 			response.put("mensaje", e.getCode());
-			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CONFLICT);
 		}
-		
-		response.put("mensaje","Cuenta atras iniciada al tiempo: " + valor);
-		
-		
-		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
-	}	
-	
+
+		response.put("mensaje", "Cuenta atras iniciada al tiempo: " + valor);
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
 	
 }

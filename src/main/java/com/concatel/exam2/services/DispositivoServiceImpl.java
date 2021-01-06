@@ -14,26 +14,24 @@ public class DispositivoServiceImpl implements IDispositivoService{
 
 	private static final Logger logger = LoggerFactory.getLogger(ClassName.class);
 	
-
 	public static Dispositivo dispositivo = new Dispositivo();
 	
 	@Override
 	public void start() throws DispositivoException {
 		logger.info("inicio metodo start ");
 		try {
-		for (int i = dispositivo.getValorInicial() ; i >= 0; i--)
-		{
+			for (int i = dispositivo.getValorInicial(); i >= 0; i--) {
 				Thread.sleep(1000);
-				System.out.println("Tiempo que queda " +	i);
-				
-			dispositivo.setValorActual(i);
-		}
-		
+				System.out.println("Tiempo que queda " + i);
+
+				dispositivo.setValorActual(i);
+			}
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		logger.info("fin metodo start ");
 	}
 
@@ -42,17 +40,15 @@ public class DispositivoServiceImpl implements IDispositivoService{
 		logger.info("inicio metodo valorInicial ");
 		dispositivo.setValorInicial(valorInicial);
 		logger.info("fin metodo valorInicial ");
-		
+
 	}
 
 	@Override
 	public Integer valorActual() {
 		logger.info("inicio metodo valorActual ");
-		
-		
+
 		return dispositivo.getValorActual();
 	}
-
 
 
 }
