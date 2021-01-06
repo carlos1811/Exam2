@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.concatel.exam2.exceptions.DispositivoException;
 import com.concatel.exam2.services.IDispositivoService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
@@ -45,7 +46,13 @@ public class DispositivoController {
 		} catch (RuntimeException e) {
 			response.put("errors",e.getMessage());
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
+		} catch (DispositivoException e) {
+			
+			response.put("mensaje", e.getMessage());
+			response.put("mensaje", e.getCode());
+			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
 		}
+		
 		
 		response.put("mensaje", "Cuenta atras finalizada");
 		
@@ -84,6 +91,10 @@ public class DispositivoController {
 		} catch (RuntimeException e) {
 			response.put("errors",e.getMessage());
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
+		} catch (DispositivoException e) {
+			response.put("mensaje", e.getMessage());
+			response.put("mensaje", e.getCode());
+			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
 		}
 		
 		response.put("mensaje","Cuenta atras iniciada al tiempo: " + valor);

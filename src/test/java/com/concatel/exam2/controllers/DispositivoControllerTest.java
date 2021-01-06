@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.concatel.exam2.entity.Dispositivo;
+import com.concatel.exam2.exceptions.DispositivoException;
 import com.concatel.exam2.services.IDispositivoService;
 
 class DispositivoControllerTest {
@@ -46,7 +47,7 @@ class DispositivoControllerTest {
 	
 	
 	@Test
-	public void valorInicial() 
+	public void valorInicial() throws DispositivoException 
 	
 	{
 		
@@ -60,7 +61,7 @@ class DispositivoControllerTest {
 	
 	
 	@Test
-	public void startTest() 
+	public void startTest() throws DispositivoException 
 	
 	{
 		
