@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,7 @@ import com.concatel.exam2.services.IDispositivoService;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+
 @RestController
 @RequestMapping("/api")
 public class DispositivoController {
@@ -42,7 +41,7 @@ public class DispositivoController {
 		Map<String,Object> response = new HashMap<>();
 					
 		try {
-			dispositivoService.start();
+		dispositivoService.start();
 		} catch (RuntimeException e) {
 			response.put("errors",e.getMessage());
 				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
@@ -80,11 +79,11 @@ public class DispositivoController {
 		
 		try {
 		
-		dispositivoService.valorInicial(valor);
+			dispositivoService.valorInicial(valor);
 				
 		} catch (RuntimeException e) {
 			response.put("errors",e.getMessage());
-				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CONFLICT);
 		}
 		
 		return  new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
